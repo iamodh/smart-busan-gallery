@@ -7,7 +7,7 @@ const app = express();
 dbConnect();
 
 app.use("/", require("./routes/rootRoutes"));
-// app.use("/main", require("./routes/mainRoutes"));
+app.use("/main", require("./routes/mainRoutes"));
 
 app.listen(PORT, () => {
   console.log(`Server listening from http://localhost:${PORT}`);
