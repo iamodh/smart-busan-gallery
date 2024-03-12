@@ -1,11 +1,15 @@
-const handleHome = (req, res) => {
+const getHome = (req, res) => {
   res.send("Home");
 };
-const handleLogin = (req, res) => {
+const getLogin = (req, res) => {
   res.send("Login");
 };
-const handleJoin = (req, res) => {
-  res.send("Join");
+const getJoin = (req, res) => {
+  res.status(200).render("join");
+};
+const postJoin = (req, res) => {
+  const { userName, password } = req.body;
+  res.send(`${userName} ${password}`);
 };
 
-module.exports = { handleHome, handleLogin, handleJoin };
+module.exports = { getHome, getLogin, getJoin, postJoin };
