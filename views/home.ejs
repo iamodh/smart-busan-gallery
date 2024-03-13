@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join</title>
+    <title>Login</title>
   </head>
   <body>
-    <form method="POST" action="/join">
+    <form method="POST" action="/">
       <input type="text" placeholder="User Name" name="userName" required />
       <input
         type="password"
@@ -15,14 +15,8 @@
         required
         minlength="5"
       />
-      <input
-        type="password"
-        placeholder="Password confirm"
-        name="password1"
-        required
-        minlength="5"
-      />
       <input type="submit" />
     </form>
+    <a href="/join">회원가입</a>
   </body>
 </html>

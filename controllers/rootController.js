@@ -1,15 +1,55 @@
-const getHome = (req, res) => {
-  res.send("Home");
-};
+const User = require("../models/User");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+const jwtSecret = process.env.JWT_SECRET;
+
+// @desc Show login
+// @route Get /
 const getLogin = (req, res) => {
-  res.send("Login");
+  res.render("home");
 };
+
+// @desc Login user
+// @route Post /
+const postLogin = async (req, res) => {
+  const { userName, password } = req.body;
+  const user = await User.findOne({ userName });
+  if (!user) {
+    return res.send("존재하지 않는 아이디입니다.");
+  }
+  const match = await bcrypt.compare(password, user.password);
+  if (!match) {
+    return res.send("비밀번호가 틀렸습니다.");
+  }
+
+  const token = jwt.sign({ userName: user.userName }, jwtSecret); // token 생성
+  res.cookie("token", token, { httpOnly: true }); // token을 cookie에 저장
+
+  return res.send("로그인 성공");
+};
+
 const getJoin = (req, res) => {
   res.status(200).render("join");
 };
-const postJoin = (req, res) => {
-  const { userName, password } = req.body;
-  res.send(`${userName} ${password}`);
+
+// @desc Join user
+// @route Post /join
+const postJoin = async (req, res) => {
+  const { userName, password, password1 } = req.body;
+  if (password !== password1) {
+    return res.send("패스워드를 다시 확인해주세요.");
+  }
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const user = await User.create({ userName, password: hashedPassword });
+  res.status(201).redirect("/");
 };
 
-module.exports = { getHome, getLogin, getJoin, postJoin };
+// @desc Logout user
+// @route Get /logout
+const getLogout = (req, res) => {
+  res.clearCookie("token");
+  res.redirect("/");
+};
+
+module.exports = { getLogin, postLogin, getJoin, postJoin, getLogout };
