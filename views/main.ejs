@@ -6,7 +6,17 @@
     <title>Main</title>
   </head>
   <body>
-    <h1><%=userName %></h1>
+    <header>
+      <h1>Home</h1>
+      <a href="/logout">Logout</a>
+      <a href="/main/post">New Post</a>
+    </header>
+    <main>
+      <ul>
+        <% posts.forEach((post) => { %>
+        <a href="main/<%=post._id%>""><li><%=post.postTitle %></li></a>
+        <% }) %>
+      </ul>
+    </main>
   </body>
-  <a href="/logout">Logout</a>
 </html>

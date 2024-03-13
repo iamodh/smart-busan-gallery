@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const PostSchema = new Schema({
   postTitle: {
     type: String,
+    required: true,
   },
 
   postContent: {
@@ -33,12 +34,15 @@ const PostSchema = new Schema({
     default: 0,
   },
 
-  recommend: [
-    {
-      type: Number,
-      defalut: 0,
-    },
-  ],
+  ups: {
+    type: Number,
+    default: 0,
+  },
+
+  downs: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const Post = mongoose.model("Post", PostSchema);

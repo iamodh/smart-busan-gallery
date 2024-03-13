@@ -23,10 +23,11 @@ const postLogin = async (req, res) => {
     return res.send("비밀번호가 틀렸습니다.");
   }
 
-  const token = jwt.sign({ userName: user.userName }, jwtSecret); // token 생성
-  res.cookie("token", token, { httpOnly: true }); // token을 cookie에 저장
+  const token = jwt.sign({ _id: user._id, userName: user.userName }, jwtSecret);
+  console.log(user._id);
+  res.cookie("token", token, { httpOnly: true });
 
-  return res.send("로그인 성공");
+  return res.redirect("/main");
 };
 
 const getJoin = (req, res) => {
