@@ -23,8 +23,10 @@ const postLogin = async (req, res) => {
     return res.send("비밀번호가 틀렸습니다.");
   }
 
-  const token = jwt.sign({ _id: user._id, userName: user.userName }, jwtSecret);
-  console.log(user._id);
+  const token = jwt.sign(
+    { userId: user._id, userName: user.userName },
+    jwtSecret
+  );
   res.cookie("token", token, { httpOnly: true });
 
   return res.redirect("/main");

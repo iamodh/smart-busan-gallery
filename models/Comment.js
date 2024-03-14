@@ -2,16 +2,16 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
-  CommentTitle: {
-    type: String,
-  },
-
-  CommentContent: {
+  commentContent: {
     type: String,
     required: true,
   },
 
   writer: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
+  post: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
