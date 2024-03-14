@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Main</title>
-  </head>
+<%- include('./include/header') %>
   <body>
-    <header>
-      <h1>Home</h1>
-      <a href="/logout">Logout</a>
-      <a href="/main/post">New Post</a>
-    </header>
     <main>
       <ul>
         <% posts.forEach((post) => { %>
@@ -19,4 +8,4 @@
       </ul>
     </main>
   </body>
-</html>
+<%- include('./include/footer') %>
