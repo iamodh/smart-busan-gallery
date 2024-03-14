@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/postview.css">
+</head>
+<body>
+    <div>ckeditor</div>
+    <div class="reco-area">
+        <ul class="reco-lst">
+            <li>
+                <span id="recomm-btn-up">0</span>
+                <button class="reco-icon" id="ups"><img src="../img/up.png" alt="추천"></button>
+                <div class="reco-num-box"></div>
+            </li>
+            <li>
+                <div class="reco-num-box"></div>
+                <button class="reco-icon" id="downs"><img src="../img/down.png" alt="비추천"></button>
+                <span id="recomm-btn-down">0</span>
+            </li>
+        </ul>
+    </div> 
+    
+    <div class="comment-section">
+        <h2>전체댓글</h2>
+        <textarea class="comment-input" id="commentInput" placeholder="댓글을 입력하세요..."></textarea>
+        <button onclick="submitComment()">댓글 달기</button>
+        <div class="comment-list" id="commentList">
+            <!-- 여기에 사용자가 입력한 댓글이 나타날 예정 -->
+        </div>
+    </div>
+</body>
+<script src="../js/postview.js"></script>

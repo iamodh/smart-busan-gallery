@@ -1,0 +1,51 @@
+.reco-lst {
+    list-style: none;
+    padding: 0;
+}
+
+.reco-lst li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.reco-icon img {
+    width: 50px;
+    height: 50px;
+}
+
+.reco-lst button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+#recomm-btn-up,
+#recomm-btn-down {
+    display: inline-block; /* 텍스트와 아이콘을 수평으로 정렬 */
+    margin-right: 5px; /* 텍스트와 아이콘 사이의 간격 조정 */
+    font-size: 20px;
+    vertical-align: top; /* 텍스트의 수직 위치 조정 */
+    position: relative;
+    top: 13px; /* 텍스트를 조금 더 위로 올림 */
+}
+
+.comment-section {
+    margin-top: 20px;
+}
+
+.comment-input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.comment-list {
+    margin-top: 20px;
+}
+
+.comment {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+}
+
