@@ -1,16 +1,22 @@
 const express = require("express");
 
+/* Middlewares */
+const checkNotLogin = require("../middlewares/checkNotLogin");
+
 /* Controllers */
 const {
-  handleHome,
-  handleJoin,
-  handleLogin,
+  getHome,
+  getLogin,
+  postLogin,
+  getJoin,
+  postJoin,
+  getLogout,
 } = require("../controllers/rootController");
 
 const router = express.Router();
 
-router.route("/").get(handleHome);
-router.route("/login").get(handleLogin);
-router.route("/join").get(handleJoin);
+router.route("/").all(checkNotLogin).get(getLogin).post(postLogin);
+router.route("/join").all(checkNotLogin).get(getJoin).post(postJoin);
+router.route("/logout").get(getLogout);
 
 module.exports = router;
