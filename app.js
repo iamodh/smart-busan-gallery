@@ -4,7 +4,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const cookieParser = require("cookie-parser");
 const dbConnect = require("./config/dbConnect");
-const flash = require("express-flash");
+const methodOverride = require("method-override");
 
 const PORT = 3000;
 
@@ -30,7 +30,7 @@ app.use(
 /* data middlewares */
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(flash());
+app.use(methodOverride("_method"));
 
 /* routers */
 app.use("/", require("./routes/rootRoutes"));

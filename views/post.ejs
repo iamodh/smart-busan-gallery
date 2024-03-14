@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=post.postTitle%></title>
+  </head>
+  <header>
+    <a href="/main">Go to main</a>
+  </header>
+  <body>
+    <!-- post section -->
+    <h1><%=post.postTitle%></h1>
+    <p><%=post.postContent%></p>
+    <hr />
+    <form method="POST" action="/main/<%=post._id%>/updateUps?_method=PUT">
+      <input type="submit" value="UP: <%=post.ups%>" />
+    </form>
+    <form method="POST" action="/main/<%=post._id%>/updateDowns?_method=PUT">
+      <input type="submit" value="DOWN: <%=post.downs%>" />
+    </form>
+    <hr />
+    <!-- comments section -->
+    <ul>
+      <% post.comments.forEach((comment) => { %>
+      <li><%=comment.commentContent %></li>
+      <% }) %>
+    </ul>
+    <hr />
+    <!-- add comment section -->
+    <form action="/main/<%=post._id%>/addComment" method="POST">
+      <textarea name="commentContent" required></textarea>
+      <input type="submit" />
+    </form>
+  </body>
+</html>
