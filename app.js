@@ -10,7 +10,7 @@ const PORT = 3000;
 
 const app = express();
 dbConnect();
-
+app.use(express.static("./public"))
 app.set("view engine", "ejs");
 app.set("views", "./views");
 

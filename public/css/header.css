@@ -9,6 +9,15 @@ body{
   margin: 0;
 }
 
+form{
+  margin: 150px;
+}
+
+.main_search{
+  width: 100%;
+  text-align: center;
+}
+
 .search_logo img{
   float: left;
   display: block;
@@ -41,8 +50,8 @@ body{
 .main_searchinput{
   width: 90vw;
   height: 30px;
-  margin: 0 auto;
-  display: block;
+  margin: 50 auto;
+  display: inline-block;
 }
 
 .menubar{
