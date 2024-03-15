@@ -19,6 +19,11 @@
     cursor: pointer;
 }
 
+.reco-area {
+    display: flex;
+    justify-content: center;
+}
+
 #recomm-btn-up,
 #recomm-btn-down {
     display: inline-block; /* 텍스트와 아이콘을 수평으로 정렬 */
