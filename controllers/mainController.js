@@ -1,3 +1,5 @@
+const multer = require("multer");
+
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.JWT_SECRET;
@@ -89,9 +91,17 @@ const getAddPost = async (req, res) => {
 // @route Post /main/addPost
 const postAddPost = async (req, res) => {
   const { postTitle, postContent } = req.body;
+  const { file } = req;
   const token = req.cookies.token;
   const { userId } = jwt.verify(token, jwtSecret);
-  const newPost = await Post.create({ postTitle, postContent, writer: userId });
+
+  const newPost = await Post.create({
+    postTitle,
+    postContent,
+    writer: userId,
+    imageUrl: file ? file.path : "",
+  });
+
   const user = await User.findOne({ _id: userId });
   user.posts.unshift(newPost);
   user.save();

@@ -10,13 +10,15 @@
       <h1>Add post</h1>
     </header>
     <main>
-      <form action="/main/addPost" method="POST">
+      <form action="/main/addPost" method="POST" enctype="multipart/form-data">
         <input
           type="text"
           required
           placeholder="Post title here"
           name="postTitle"
         />
+        <label for="image">이미지 추가</label>
+        <input id="image" name="image" type="file" accept="image/*" />
         <textarea
           required
           placeholder="Post content here"

@@ -2,6 +2,7 @@ const express = require("express");
 
 /* Middlewares */
 const checkLogin = require("../middlewares/checkLogin");
+const { imageUpload } = require("../middlewares/imageUplod");
 
 /* Controllers */
 const {
@@ -22,7 +23,11 @@ const router = express.Router();
 
 router.route("/").all(checkLogin).get(showMain);
 router.route("/myPage").all(checkLogin).get(showMyPage);
-router.route("/addPost").all(checkLogin).get(getAddPost).post(postAddPost);
+router
+  .route("/addPost")
+  .all(checkLogin)
+  .get(getAddPost)
+  .post(imageUpload.single("image"), postAddPost);
 router.route("/:id").all(checkLogin).get(seePost);
 router
   .route("/:id/updatePost")
