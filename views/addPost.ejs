@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <h1>Add post</h1>
+    </header>
+    <main>
+      <form action="/main/addPost" method="POST">
+        <input
+          type="text"
+          required
+          placeholder="Post title here"
+          name="postTitle"
+        />
+        <textarea
+          required
+          placeholder="Post content here"
+          name="postContent"
+        ></textarea>
+        <input type="submit" value="Add post" />
+      </form>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<%- include('./include/header') %>
+<body style="margin-top: 200px">
+  <header>
+    <h1><%=user.userName%>'s Page</h1>
+  </header>
+  <main>
+    <h3>Posts</h3>
+    <ul>
+      <% user.posts.forEach((post) => { %>
+      <a href="/main/<%=post._id%>"><li><%=post.postTitle %></li></a>
+      <% }) %>
+    </ul>
+    <hr />
+    <h3>Comments</h3>
+    <ul>
+      <% user.comments.forEach((comment) => { %>
+      <a href="/main/<%=comment.post%>"
+        ><li><%=comment.commentContent %></li></a
+      >
+      <% }) %>
+    </ul>
+  </main>
+</body>
+<%- include('./include/footer') %>
