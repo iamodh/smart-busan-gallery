@@ -39,8 +39,8 @@ const getJoin = (req, res) => {
 // @desc Join user
 // @route Post /join
 const postJoin = async (req, res) => {
-  const { userName, password, password1 } = req.body;
-  if (password !== password1) {
+  const { userName, password, password2 } = req.body;
+  if (password !== password2) {
     return res.send("패스워드를 다시 확인해주세요.");
   }
   const hashedPassword = await bcrypt.hash(password, 10);

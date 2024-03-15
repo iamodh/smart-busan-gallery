@@ -7,8 +7,17 @@
   </head>
   <header>
     <a href="/main">Go to main</a>
-    <a href="/main/<%=post._id%>/updatePost">수정하기</a>
-    <a href="/main/<%=post._id%>/deletePost">삭제하기</a>
+    <% if(post.writer.toString() === userId) { %>
+    <div style="display: flex">
+      <a href="/main/<%=post._id%>/updatePost">수정하기</a>
+      <form
+        action="/main/<%=post._id%>/deletePost?_method=DELETE"
+        method="POST"
+      >
+        <input type="submit" value="삭제하기" />
+      </form>
+    </div>
+    <% } %>
   </header>
   <body>
     <!-- post section -->

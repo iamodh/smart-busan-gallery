@@ -12,26 +12,6 @@ const showMain = async (req, res) => {
   res.status(200).render("main", { posts });
 };
 
-// @desc Create post
-// @route Get /main/post
-const createPost = (req, res) => {
-  res.status(200).render("createPost");
-};
-
-// @desc Upload post
-// @route Post /main/post
-const uploadPost = async (req, res) => {
-  const { postTitle, postContent } = req.body;
-  const token = req.cookies.token;
-  const { userId } = jwt.verify(token, jwtSecret);
-  const newPost = await Post.create({ postTitle, postContent, writer: userId });
-
-  const user = await User.findOne({ _id: userId });
-  user.posts.unshift(newPost._id);
-  await user.save();
-  res.redirect("/main");
-};
-
 // @desc See post
 // @route Get /main/:id
 const seePost = async (req, res) => {
@@ -39,7 +19,10 @@ const seePost = async (req, res) => {
   const post = await Post.findById(id).populate("comments");
   post.views = post.views + 1;
   post.save();
-  res.status(200).render("post", { post });
+
+  const token = req.cookies.token;
+  const { userId } = jwt.verify(token, jwtSecret);
+  res.status(200).render("post", { post, userId });
 };
 
 // @desc Add comment
@@ -114,10 +97,37 @@ const postAddPost = async (req, res) => {
   res.status(201).redirect("/main");
 };
 
+// @desc Get update post page
+// @route Get /main/:id/updatePost
+const getUpdatePost = async (req, res) => {
+  const postId = req.params.id;
+  const post = await Post.findOne({ _id: postId });
+  res.status(200).render("updatePost", { post });
+};
+
+// @desc Update post
+// @route Put /main/:id/updatePost
+const updatePost = async (req, res) => {
+  const postId = req.params.id;
+  const { postTitle, postContent } = req.body;
+  console.log(postTitle, postContent);
+  await Post.findByIdAndUpdate(postId, {
+    postTitle,
+    postContent,
+  });
+  res.status(201).redirect(`/main/${postId}`);
+};
+
+// @desc Delete post
+// @route Delete /main/:id/deletedPost
+const deletePost = async (req, res) => {
+  const postId = req.params.id;
+  await Post.findByIdAndDelete(postId);
+  res.status(201).redirect(`/main`);
+};
+
 module.exports = {
   showMain,
-  createPost,
-  uploadPost,
   seePost,
   addComment,
   updateUps,
@@ -125,4 +135,7 @@ module.exports = {
   showMyPage,
   getAddPost,
   postAddPost,
+  getUpdatePost,
+  updatePost,
+  deletePost,
 };
