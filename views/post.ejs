@@ -13,9 +13,11 @@
     <h1><%=post.postTitle%></h1>
     <p><%=post.postContent%></p>
     <hr />
+    <!-- up 버튼 -->
     <form method="POST" action="/main/<%=post._id%>/updateUps?_method=PUT">
       <input type="submit" value="UP: <%=post.ups%>" />
     </form>
+    <!-- down 버튼 -->
     <form method="POST" action="/main/<%=post._id%>/updateDowns?_method=PUT">
       <input type="submit" value="DOWN: <%=post.downs%>" />
     </form>
