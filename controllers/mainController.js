@@ -18,7 +18,6 @@ const seePost = async (req, res) => {
   const posts = await Post.find({});
   const { id } = req.params;
   const post = await Post.findById(id).populate("comments");
-  console.log(post);
   post.views = post.views + 1;
   post.save();
 
