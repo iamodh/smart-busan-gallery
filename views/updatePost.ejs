@@ -10,7 +10,11 @@
       <h1>Update post</h1>
     </header>
     <main>
-      <form action="/main/<%=post._id%>/updatePost?_method=PUT" method="POST">
+      <form
+        action="/main/<%=post._id%>/updatePost?_method=PUT"
+        method="POST"
+        enctype="multipart/form-data"
+      >
         <input
           type="text"
           required
@@ -18,10 +22,12 @@
           name="postTitle"
           value="<%=post.postTitle%>"
         />
+        <label for="image">이미지 수정</label>
+        <input id="image" name="image" type="file" accept="image/*" />
         <textarea required placeholder="Post content here" name="postContent">
 <%=post.postContent%></textarea
         >
-        <input type="file" accept="image/*" />
+
         <input type="submit" value="Update post" />
       </form>
     </main>

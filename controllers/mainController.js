@@ -1,3 +1,5 @@
+const multer = require("multer");
+
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.JWT_SECRET;
@@ -91,7 +93,19 @@ const postAddPost = async (req, res) => {
   const { postTitle, postContent } = req.body;
   const token = req.cookies.token;
   const { userId } = jwt.verify(token, jwtSecret);
-  const newPost = await Post.create({ postTitle, postContent, writer: userId });
+  const { file } = req;
+  let imageUrl;
+  if (file) {
+    const path = file.path;
+    imageUrl = path.substr(6);
+  }
+  const newPost = await Post.create({
+    postTitle,
+    postContent,
+    writer: userId,
+    imageUrl: file ? imageUrl : "",
+  });
+
   const user = await User.findOne({ _id: userId });
   user.posts.unshift(newPost);
   user.save();
@@ -111,10 +125,17 @@ const getUpdatePost = async (req, res) => {
 const updatePost = async (req, res) => {
   const postId = req.params.id;
   const { postTitle, postContent } = req.body;
-  console.log(postTitle, postContent);
+  const { file } = req;
+  let imageUrl;
+  if (file) {
+    const path = file.path;
+    imageUrl = path.substr(6);
+  }
+  console.log(imageUrl);
   await Post.findByIdAndUpdate(postId, {
     postTitle,
     postContent,
+    imageUrl: file ? imageUrl : "",
   });
   res.status(201).redirect(`/main/${postId}`);
 };
