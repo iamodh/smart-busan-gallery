@@ -17,7 +17,7 @@ const showMain = async (req, res) => {
 // @desc See post
 // @route Get /main/:id
 const seePost = async (req, res) => {
-  const posts = await Post.find({});
+  const posts = await Post.find({}).sort({ createdAt: -1 });
   const { id } = req.params;
   const post = await Post.findById(id).populate("comments");
   post.views = post.views + 1;
