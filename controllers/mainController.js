@@ -69,7 +69,7 @@ const addComment = async (req, res) => {
 
 const updateUps = async (req, res) => {
   const postId = req.params.id;
-  const post = await Post.findById(postId);
+  const post = await Post.findOne({ _id: postId });
   post.ups = post.ups + 1;
   post.save();
 
@@ -78,10 +78,40 @@ const updateUps = async (req, res) => {
 
 const updateDowns = async (req, res) => {
   const postId = req.params.id;
-  const post = await Post.findById(postId);
+  const post = await Post.findOne({ _id: postId });
   post.save();
   post.downs = post.downs + 1;
   return res.status(201).redirect(`/main/${postId}`);
+};
+
+const showMyPage = async (req, res) => {
+  const token = req.cookies.token;
+  const { userId } = jwt.verify(token, jwtSecret);
+  console.log(userId);
+  const user = await User.findOne({ _id: userId })
+    .populate("posts")
+    .populate("comments");
+  console.log(user);
+  return res.status(200).render("myPage", { user });
+};
+
+// @desc Get add post page
+// @route Get /main/addPost
+const getAddPost = async (req, res) => {
+  return res.status(200).render("addPost");
+};
+
+// @desc Add post
+// @route Post /main/addPost
+const postAddPost = async (req, res) => {
+  const { postTitle, postContent } = req.body;
+  const token = req.cookies.token;
+  const { userId } = jwt.verify(token, jwtSecret);
+  const newPost = await Post.create({ postTitle, postContent, writer: userId });
+  const user = await User.findOne({ _id: userId });
+  user.posts.unshift(newPost);
+  user.save();
+  res.status(201).redirect("/main");
 };
 
 module.exports = {
@@ -92,4 +122,7 @@ module.exports = {
   addComment,
   updateUps,
   updateDowns,
+  showMyPage,
+  getAddPost,
+  postAddPost,
 };
