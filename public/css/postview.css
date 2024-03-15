@@ -5,6 +5,18 @@
     margin-right: auto;
 }
 
+.post-section h1{
+    font-size: 35px;
+}
+
+.post-section span{
+    color: rgb(130, 128, 128);
+}
+
+.post-date{
+    font-size: 14px;
+}
+
 .reco-area {
     display: flex;
     justify-content: center;
