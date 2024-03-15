@@ -2,9 +2,20 @@
 <body style="margin-top: 150px">
     <link rel="stylesheet" href="/css/postview.css">
     <link rel="stylesheet" href="/css/main.css">
-    
+    <% if(post.writer.toString() === userId) { %>
+        <div style="display: flex">
+          <a href="/main/<%=post._id%>/updatePost">수정하기</a>
+          <form
+            action="/main/<%=post._id%>/deletePost?_method=DELETE"
+            method="POST"
+          >
+            <input type="submit" value="삭제하기" />
+          </form>
+        </div>
+    <% } %>
     <div class="post-section">
         <h1><%=post.postTitle%></h1>
+        <img src="<%=post.imageUrl%>"/>
         <p><%=post.postContent%></p>
     </div>
 

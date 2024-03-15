@@ -33,7 +33,7 @@ router
   .route("/:id/updatePost")
   .all(checkLogin)
   .get(getUpdatePost)
-  .put(updatePost);
+  .put(imageUpload.single("image"), updatePost);
 router.route("/:id/deletePost").all(checkLogin).delete(deletePost);
 router.route("/:id/addComment").all(checkLogin).post(addComment);
 router.route("/:id/updateUps").all(checkLogin).put(updateUps);

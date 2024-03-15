@@ -91,15 +91,19 @@ const getAddPost = async (req, res) => {
 // @route Post /main/addPost
 const postAddPost = async (req, res) => {
   const { postTitle, postContent } = req.body;
-  const { file } = req;
   const token = req.cookies.token;
   const { userId } = jwt.verify(token, jwtSecret);
-
+  const { file } = req;
+  let imageUrl;
+  if (file) {
+    const path = file.path;
+    imageUrl = path.substr(6);
+  }
   const newPost = await Post.create({
     postTitle,
     postContent,
     writer: userId,
-    imageUrl: file ? file.path : "",
+    imageUrl: file ? imageUrl : "",
   });
 
   const user = await User.findOne({ _id: userId });
@@ -121,10 +125,17 @@ const getUpdatePost = async (req, res) => {
 const updatePost = async (req, res) => {
   const postId = req.params.id;
   const { postTitle, postContent } = req.body;
-  console.log(postTitle, postContent);
+  const { file } = req;
+  let imageUrl;
+  if (file) {
+    const path = file.path;
+    imageUrl = path.substr(6);
+  }
+  console.log(imageUrl);
   await Post.findByIdAndUpdate(postId, {
     postTitle,
     postContent,
+    imageUrl: file ? imageUrl : "",
   });
   res.status(201).redirect(`/main/${postId}`);
 };
