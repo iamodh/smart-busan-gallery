@@ -15,14 +15,16 @@ const showMain = async (req, res) => {
 // @desc See post
 // @route Get /main/:id
 const seePost = async (req, res) => {
+  const posts = await Post.find({});
   const { id } = req.params;
   const post = await Post.findById(id).populate("comments");
+  console.log(post);
   post.views = post.views + 1;
   post.save();
 
   const token = req.cookies.token;
   const { userId } = jwt.verify(token, jwtSecret);
-  res.status(200).render("post", { post, userId });
+  res.status(200).render("post", { post, posts, userId });
 };
 
 // @desc Add comment
