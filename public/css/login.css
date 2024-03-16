@@ -1,10 +1,11 @@
 /*login css 시작 */
 /* login 코드 전 구역  */
 body{
-    background-color: #Ffff;
+    background-color: #fff;
 }
 #container{
-    border: 1px solid #000;
+    background-color: #f7f1e3;
+    border: none;
     padding: 1rem;
     position: absolute;
     left:50%;

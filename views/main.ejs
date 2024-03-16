@@ -26,8 +26,9 @@
         </thead>
         <tbody class = "listwrap2">
             <tr class ="ub-content">
+                <%let count = 1; %>
                 <% posts.forEach((post) => { %>
-                <td class="gall_num" style="height: 25px;">1</td>
+                <td class="gall_num" style="height: 25px;"><%=count++%></td>
                 <td class="gall_subject">일반</td>
                 <td class="gall_tit ub-word">
                     <a href="main/<%=post._id%>" view-msg>
