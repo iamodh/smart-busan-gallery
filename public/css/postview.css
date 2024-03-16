@@ -48,8 +48,6 @@
     margin-left: 10px; /* 이미지 버튼과 텍스트 사이의 간격 조정 */
 }
 
-
-
 .comment-section {
     margin-top: 20px;
     width: 80vw;
@@ -69,4 +67,40 @@
     margin-bottom: 10px;
 }
 
-
+.updateBtnWrapper{
+    width: 100%;
+    display: grid;
+    text-align: center;
+    grid-template-columns:1fr 1fr;
+    justify-content: center;
+}
+.updateBtn{
+    text-decoration: none;
+}
+.updateBtnWrapper a:link, a:visited {
+    background-color: #f7f1e3;
+    color: black;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid;
+}
+.updateBtnWrapper > form {
+    background-color: #f7f1e3;
+    color:black;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid;
+}
+.updateBtnWrapper > form > input{
+    background-color: #f7f1e3;
+    color: black;
+    padding: 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+}

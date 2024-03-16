@@ -3,12 +3,12 @@
 
 /* 배경지정 */
 body{
-  background-color: #Ffff;
+  background-color:#ffff;
 }
 
 /* gird 컨테이너 */
 #container{
-  border: 1px solid #000;
+  border: none;
   padding: 1rem;
   position: absolute;
   left:50%;
@@ -17,6 +17,7 @@ body{
   display: grid;
   justify-content:center;
   align-items:center;
+  background-color: #f7f1e3;
 }
 
 /*logo div*/

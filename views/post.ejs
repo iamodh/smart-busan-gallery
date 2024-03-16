@@ -2,17 +2,6 @@
 <body style="margin-top: 150px">
     <link rel="stylesheet" href="/css/postview.css">
     <link rel="stylesheet" href="/css/main.css">
-    <% if(post.writer.toString() === userId) { %>
-        <div style="display: flex">
-          <a href="/main/<%=post._id%>/updatePost">수정하기</a>
-          <form
-            action="/main/<%=post._id%>/deletePost?_method=DELETE"
-            method="POST"
-          >
-            <input type="submit" value="삭제하기" />
-          </form>
-        </div>
-    <% } %>
     <div class="post-section">
         <h1><%=post.postTitle%></h1>
         <span class="post-date">작성일 <%=new Date(post.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}) %></span>
@@ -22,8 +11,19 @@
         <hr/>
         <img src="<%=post.imageUrl%>" />
         <p><%=post.postContent%></p>
+            <% if(post.writer.toString() === userId) { %>
+                <div class="updateBtnWrapper">
+                  <a href="/main/<%=post._id%>/updatePost" class="updateBtn">수정하기</a>
+                  <form
+                    action="/main/<%=post._id%>/deletePost?_method=DELETE"
+                    method="POST"
+                  >
+                    <input type="submit" value="삭제하기" class="deleteBtn"/>
+                  </form>
+                </div>
+            <% } %>
+        </div>
     </div>
-
     <div class="reco-area">
             <!-- up 버튼 -->
             <div class="up-reco">
@@ -81,8 +81,9 @@
             </thead>
             <tbody class = "listwrap2">
                 <tr class ="ub-content">
+                    <%let count = 1; %>
                     <% posts.forEach((post) => { %>
-                    <td class="gall_num" style="height: 25px;">1</td>
+                    <td class="gall_num" style="height: 25px;"><%= count++ %></td>
                     <td class="gall_subject">일반</td>
                     <td class="gall_tit ub-word">
                         <a href="<%=post._id%>" view-msg>
